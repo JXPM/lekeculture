@@ -143,23 +143,25 @@ export class LekeCultureNotifications {
         eventId: event.id,
         type: event.type,
         url: this.getNotificationUrl(event),
-        image: event.image
+        image: event.image,
+        timestamp: new Date(event.date).getTime()
       },
-      actions: [
-        {
-          action: 'view',
-          title: language === 'fr' ? 'Voir' : 'View',
-          icon: '/icons/view-icon.png'
-        },
-        {
-          action: 'remind',
-          title: language === 'fr' ? 'Rappeler plus tard' : 'Remind later',
-          icon: '/icons/remind-icon.png'
-        }
-      ],
+      ...(language === 'fr' || language === 'en' ? {
+        actions: [
+          {
+            action: 'view',
+            title: language === 'fr' ? 'Voir' : 'View',
+            icon: '/icons/view-icon.png'
+          },
+          {
+            action: 'remind',
+            title: language === 'fr' ? 'Rappeler plus tard' : 'Remind later',
+            icon: '/icons/remind-icon.png'
+          }
+        ]
+      } : {}),
       requireInteraction: event.urgent,
-      silent: false,
-      timestamp: new Date(event.date).getTime()
+      silent: false
     };
 
     if (this.registration) {
@@ -266,18 +268,22 @@ export class LekeCultureNotifications {
   }
 
   // Convertir la clé VAPID
-  private urlBase64ToUint8Array(base64String: string): Uint8Array {
-    const padding = '='.repeat((4 - base64String.length % 4) % 4);
-    const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/');
-    const rawData = window.atob(base64);
+  urlBase64ToUint8Array(base64String: string): Uint8Array {
+    const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
+    const base64 = (base64String + padding)
+      .replace(/-/g, "+")
+      .replace(/_/g, "/");
+  
+    const rawData = typeof window !== "undefined" ? window.atob(base64) : Buffer.from(base64, "base64").toString("binary");
     const outputArray = new Uint8Array(rawData.length);
-
+  
     for (let i = 0; i < rawData.length; ++i) {
       outputArray[i] = rawData.charCodeAt(i);
     }
-
+  
     return outputArray;
   }
+  
 
   // Événements d'exemple pour démonstration
   static getExampleEvents(): NotificationEvent[] {

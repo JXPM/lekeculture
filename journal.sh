@@ -4,8 +4,8 @@ git init
 git branch -M main
 git add .
 git commit -m "first commit"
-gh repo create lekeistheculture --public
-git remote add origin https://github.com/JXPM/lekeistheculture.git
+gh repo create lekeculture --public
+git remote add origin https://github.com/JXPM/lekeculture.git
 git push --set-upstream origin main
 
 # Supprimer le fichier .env du suivi git

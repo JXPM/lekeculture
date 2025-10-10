@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   allowedDevOrigins: ["*.preview.same-app.com"],
+  outputFileTracingRoot: __dirname,
+
   images: {
     unoptimized: true,
     domains: [
