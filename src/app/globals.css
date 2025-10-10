@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&family=Oswald:wght@200;300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 20 14.3% 4.1%;
+    --card: 0 0% 100%;
+    --card-foreground: 20 14.3% 4.1%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 20 14.3% 4.1%;
+
+    /* 🔴 Rouge principal et ses dérivés */
+    --primary: 2 93% 42%; /* #d60c07 */
+    --primary-foreground: 60 9.1% 97.8%;
+    --secondary: 60 4.8% 95.9%;
+    --secondary-foreground: 24 9.8% 10%;
+
+    --muted: 60 4.8% 95.9%;
+    --muted-foreground: 25 5.3% 44.7%;
+    --accent: 60 4.8% 95.9%;
+    --accent-foreground: 24 9.8% 10%;
+    --destructive: 2 93% 42%;
+    --destructive-foreground: 60 9.1% 97.8%;
+    --border: 20 5.9% 90%;
+    --input: 20 5.9% 90%;
+    --ring: 2 93% 42%;
+    --radius: 0.5rem;
+
+    /* Palette pour graphiques */
+    --chart-1: 2 80% 45%;  /* #d60c07 */
+    --chart-2: 4 70% 55%;  /* #e54a3f */
+    --chart-3: 5 60% 65%;  /* #f3756d */
+    --chart-4: 6 55% 75%;  /* #f7a19c */
+    --chart-5: 7 50% 85%;  /* #fbd0cd */
+  }
+
+  .dark {
+    --background: 20 14.3% 4.1%;
+    --foreground: 60 9.1% 97.8%;
+    --card: 20 14.3% 4.1%;
+    --card-foreground: 60 9.1% 97.8%;
+    --popover: 20 14.3% 4.1%;
+    --popover-foreground: 60 9.1% 97.8%;
+
+    /* Variante sombre du rouge */
+    --primary: 2 80% 40%;
+    --primary-foreground: 60 9.1% 97.8%;
+    --secondary: 12 6.5% 15.1%;
+    --secondary-foreground: 60 9.1% 97.8%;
+    --muted: 12 6.5% 15.1%;
+    --muted-foreground: 24 5.4% 63.9%;
+    --accent: 12 6.5% 15.1%;
+    --accent-foreground: 60 9.1% 97.8%;
+    --destructive: 2 80% 40%;
+    --destructive-foreground: 60 9.1% 97.8%;
+    --border: 12 6.5% 15.1%;
+    --input: 12 6.5% 15.1%;
+    --ring: 2 93% 42%;
+
+    --chart-1: 2 80% 45%;
+    --chart-2: 4 70% 55%;
+    --chart-3: 5 60% 65%;
+    --chart-4: 6 55% 75%;
+    --chart-5: 7 50% 85%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-ubuntu;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-oswald;
+  }
+}
+
+@layer components {
+  /* 🎨 Dégradé sombre et élégant pour la hero section */
+  .hero-gradient {
+    background: linear-gradient(
+      135deg,
+      rgba(0, 0, 0, 0.6) 0%,
+      rgba(0, 0, 0, 0.4) 50%,
+      rgba(0, 0, 0, 0.6) 100%
+    );
+  }
+
+  /* 🔴 Motif culturel avec la nouvelle palette rouge */
+  .cultural-pattern {
+    background-image:
+      radial-gradient(circle at 25% 25%, rgba(214, 12, 7, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, rgba(229, 74, 63, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, rgba(243, 117, 109, 0.05) 0%, transparent 50%);
+  }
+
+  /* ✨ Texte en dégradé rouge profond */
+  .text-gradient {
+    background: linear-gradient(135deg, #d60c07, #b50a06, #8f0805);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* 🔘 Bouton principal */
+  .btn-primary {
+    @apply text-white transition-all duration-300 transform hover:scale-105;
+    background: linear-gradient(135deg, #d60c07, #b50a06);
+  }
+
+  .btn-primary:hover {
+    background: linear-gradient(135deg, #b50a06, #8f0805);
+  }
+
+  /* ⚫ Bouton secondaire */
+  .btn-secondary {
+    @apply bg-gray-700 hover:bg-gray-800 text-white transition-all duration-300 transform hover:scale-105;
+  }
+
+  /* 🪶 Carte avec bordure rouge élégante */
+  .card-cultural {
+    @apply bg-white/95 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1;
+    border: 1px solid rgba(214, 12, 7, 0.2);
+  }
+
+  /* 🖋️ Logo avec ton rouge principal */
+  .logo-gradient {
+    background: linear-gradient(135deg, #d60c07, #b50a06);
+  }
+
+  /* 🌅 Accent dégradé doux autour du rouge principal */
+  .accent-gradient {
+    background: linear-gradient(135deg, #d60c07, #e54a3f, #f3756d);
+  }
+}
