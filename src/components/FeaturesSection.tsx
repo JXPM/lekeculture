@@ -1,151 +1,151 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Music, Palette, Users, MapPin, Calendar, Camera } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
+import { Reveal } from '@/components/Reveal';
+import { IMAGES, type ImageKey } from '@/lib/images';
+import { RUBRIQUES, STATS } from '@/lib/content';
+import { cn } from '@/lib/utils';
 
-const features = [
-  {
-    icon: Music,
-    imageKey: 'dance',
-    bgImage: 'https://landtours.com/blog/wp-content/uploads/2023/11/Zaouli.jpg',
-    color: 'from-leke-red-500 to-leke-red-600'
-  },
-  {
-    icon: Palette,
-    imageKey: 'art',
-    bgImage: 'https://www.wildimages-phototours.com/wp-content/uploads/2023/02/Jongleurs-girls-pair-Ivory-Coast-Inger-Vandyke.jpg',
-    color: 'from-gray-600 to-gray-700'
-  },
-  {
-    icon: Users,
-    imageKey: 'music',
-    bgImage: 'https://www.wildimages-phototours.com/wp-content/uploads/2021/10/Boloye-Dancer-3-Ivory-Coast-Inger-Vandyke.jpg',
-    color: 'from-slate-600 to-slate-700'
-  }
-];
+type Kind = 'image' | 'tint';
 
-const additionalFeatures = [
+const RUBRIQUE_CARDS: {
+  id: string;
+  image: ImageKey | null;
+  kind: Kind;
+  span: string;
+  teaser: { fr: string; en: string };
+}[] = [
   {
-    icon: MapPin,
-    title: 'Tour Virtuel 3D',
-    description: 'Explorez les sites culturels ivoiriens en réalité virtuelle',
-    color: 'from-purple-500 to-purple-600'
+    id: 'patrimoine',
+    image: 'greatZimbabwe',
+    kind: 'image',
+    span: 'md:col-span-2 md:row-span-2',
+    teaser: { fr: "Cités, mosquées de terre et pierres dressées.", en: 'Cities, earthen mosques and standing stones.' },
   },
   {
-    icon: Calendar,
-    title: 'Événements Live',
-    description: 'Participez à nos événements culturels en direct',
-    color: 'from-blue-500 to-blue-600'
+    id: 'textiles',
+    image: 'kente',
+    kind: 'image',
+    span: '',
+    teaser: { fr: 'Kente, bogolan, indigo et leurs récits.', en: 'Kente, bogolan, indigo and their stories.' },
   },
   {
-    icon: Camera,
-    title: 'Galerie Communautaire',
-    description: 'Partagez vos photos et histoires culturelles',
-    color: 'from-pink-500 to-pink-600'
-  }
+    id: 'musique',
+    image: null,
+    kind: 'tint',
+    span: '',
+    teaser: { fr: 'Des percussions mandingues à l’afrobeats.', en: 'From Mandinka percussion to afrobeats.' },
+  },
+  {
+    id: 'arts',
+    image: 'zaouli',
+    kind: 'image',
+    span: '',
+    teaser: { fr: 'Du Zaouli aux bronzes de cour.', en: 'From Zaouli to court bronzes.' },
+  },
+  {
+    id: 'societe',
+    image: null,
+    kind: 'tint',
+    span: '',
+    teaser: { fr: 'Rituels, repas et gestes du quotidien.', en: 'Rituals, food and everyday gestures.' },
+  },
+  {
+    id: 'diaspora',
+    image: 'sape',
+    kind: 'image',
+    span: '',
+    teaser: { fr: 'Ce que le continent devient ailleurs.', en: 'What the continent becomes elsewhere.' },
+  },
 ];
 
 export function FeaturesSection() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const label = (id: string) => RUBRIQUES.find((r) => r.id === id)?.label[language] ?? id;
 
   return (
-    <section id="features" className="py-20 bg-gradient-to-b from-white to-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl sm:text-5xl font-oswald font-bold text-gray-900 mb-6">
-            {t('home.features.title')}
-          </h2>
-          <div className="w-24 h-1 bg-leke-red-500 mx-auto mb-8"></div>
+    <>
+      {/* Manifeste */}
+      <section className="border-t border-border">
+        <div className="mx-auto max-w-[1400px] px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+          <Reveal className="max-w-4xl">
+            <h2 className="font-serif text-3xl leading-[1.12] text-foreground sm:text-4xl lg:text-[2.9rem]">
+              {t('home.manifesto.title')}
+            </h2>
+            <p className="lede mt-6">{t('home.manifesto.body')}</p>
+          </Reveal>
+
+          <Reveal as="dl" className="mt-14 grid grid-cols-1 gap-y-8 border-t border-border pt-10 sm:grid-cols-3 sm:gap-x-10">
+            {STATS.map((s) => (
+              <div key={s.value}>
+                <dt className="font-serif text-5xl text-primary">{s.value}</dt>
+                <dd className="mt-2 text-sm uppercase tracking-[0.16em] text-muted-foreground">
+                  {s.label[language]}
+                </dd>
+              </div>
+            ))}
+          </Reveal>
         </div>
+      </section>
 
-        {/* Main Features Grid */}
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
-          {features.map((feature, index) => {
-            const Icon = feature.icon;
-            return (
-              <Card key={index} className="group overflow-hidden card-cultural">
-                <div className="relative h-64 overflow-hidden">
-                  <img
-                    src={feature.bgImage}
-                    alt={t(`home.features.${feature.imageKey}.title`)}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className={`absolute inset-0 bg-gradient-to-t ${feature.color} opacity-70`}></div>
-                  <div className="absolute top-4 left-4">
-                    <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
-                      <Icon className="h-6 w-6 text-white" />
-                    </div>
-                  </div>
-                </div>
+      {/* Rubriques (bento asymétrique) */}
+      <section id="rubriques" className="border-t border-border">
+        <div className="mx-auto max-w-[1400px] px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+          <Reveal className="mb-12 max-w-2xl">
+            <h2 className="font-serif text-3xl text-foreground sm:text-4xl">{t('home.rubriques.title')}</h2>
+            <p className="mt-4 text-lg text-foreground/70">{t('home.rubriques.intro')}</p>
+          </Reveal>
 
-                <CardHeader>
-                  <CardTitle className="text-xl font-oswald font-bold text-gray-900">
-                    {t(`home.features.${feature.imageKey}.title`)}
-                  </CardTitle>
-                  <CardDescription className="text-gray-600 font-ubuntu">
-                    {t(`home.features.${feature.imageKey}.description`)}
-                  </CardDescription>
-                </CardHeader>
-
-                <CardContent>
-                  <Button
-                    variant="outline"
-                    className="w-full hover:bg-leke-red-500 hover:text-white transition-all duration-300"
+          <div className="grid auto-rows-[210px] grid-cols-1 gap-4 md:grid-cols-3">
+            {RUBRIQUE_CARDS.map((card, i) => {
+              const href = `/insights?category=${card.id}`;
+              if (card.kind === 'image' && card.image) {
+                const img = IMAGES[card.image];
+                return (
+                  <Reveal key={card.id} delay={i * 60} className={cn('h-full', card.span)}>
+                    <Link
+                      href={href}
+                      className="group relative flex h-full flex-col justify-end overflow-hidden rounded-lg border border-border"
+                    >
+                      <img
+                        src={img.url}
+                        alt={language === 'fr' ? img.altFr : img.altEn}
+                        loading="lazy"
+                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/25 to-transparent" />
+                      <div className="relative p-5 text-background">
+                        <div className="flex items-center justify-between">
+                          <h3 className="font-serif text-2xl">{label(card.id)}</h3>
+                          <ArrowUpRight className="h-5 w-5 opacity-0 transition-opacity group-hover:opacity-100" />
+                        </div>
+                        <p className="mt-1 max-w-xs text-sm text-background/80">{card.teaser[language]}</p>
+                      </div>
+                    </Link>
+                  </Reveal>
+                );
+              }
+              return (
+                <Reveal key={card.id} delay={i * 60} className={cn('h-full', card.span)}>
+                  <Link
+                    href={href}
+                    className="group flex h-full flex-col justify-between rounded-lg border border-border bg-secondary p-5 transition-colors hover:bg-accent"
                   >
-                    En savoir plus
-                  </Button>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </div>
-
-        {/* Additional Features */}
-        <div className="grid md:grid-cols-3 gap-6">
-          {additionalFeatures.map((feature, index) => {
-            const Icon = feature.icon;
-            return (
-              <Card key={index} className="group hover:shadow-lg transition-all duration-300">
-                <CardHeader className="text-center">
-                  <div className="mx-auto mb-4">
-                    <div className={`w-16 h-16 bg-gradient-to-r ${feature.color} rounded-full flex items-center justify-center shadow-lg`}>
-                      <Icon className="h-8 w-8 text-white" />
+                    <ArrowUpRight className="h-5 w-5 text-primary transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    <div>
+                      <h3 className="font-serif text-2xl text-foreground">{label(card.id)}</h3>
+                      <p className="mt-1 text-sm text-foreground/70">{card.teaser[language]}</p>
                     </div>
-                  </div>
-                  <CardTitle className="text-lg font-oswald font-bold text-gray-900">
-                    {feature.title}
-                  </CardTitle>
-                  <CardDescription className="text-gray-600 font-ubuntu">
-                    {feature.description}
-                  </CardDescription>
-                </CardHeader>
-              </Card>
-            );
-          })}
-        </div>
-
-        {/* Call to Action */}
-        <div className="text-center mt-16">
-          <div className="inline-block bg-leke-red-500 p-8 rounded-2xl cultural-pattern">
-            <h3 className="text-2xl font-oswald font-bold text-white mb-4">
-              Prêt à découvrir la culture ivoirienne ?
-            </h3>
-            <p className="text-white/90 font-ubuntu mb-6 max-w-md mx-auto">
-              Rejoignez notre communauté et plongez dans un univers culturel riche et authentique.
-            </p>
-            <Button
-              size="lg"
-              className="bg-white text-leke-red-500 hover:bg-gray-100 font-ubuntu font-semibold"
-            >
-              {t('hero.join')}
-            </Button>
+                  </Link>
+                </Reveal>
+              );
+            })}
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }

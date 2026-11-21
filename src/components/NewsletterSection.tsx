@@ -4,147 +4,132 @@ import React, { useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Mail, CheckCircle, AlertCircle } from 'lucide-react';
+import { Reveal } from '@/components/Reveal';
+import { CheckCircle2, AlertCircle, Newspaper, CalendarDays, Sparkles } from 'lucide-react';
+
+type Status = 'idle' | 'loading' | 'success' | 'error';
 
 export function NewsletterSection() {
   const { t } = useLanguage();
   const [email, setEmail] = useState('');
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [status, setStatus] = useState<Status>('idle');
   const [message, setMessage] = useState('');
+
+  const perks = [
+    { icon: Newspaper, key: 'stories' as const },
+    { icon: CalendarDays, key: 'events' as const },
+    { icon: Sparkles, key: 'culture' as const },
+  ];
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (!email || !email.includes('@')) {
+    const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    if (!valid) {
       setStatus('error');
-      setMessage('Veuillez entrer une adresse email valide');
+      setMessage(t('home.newsletter.invalid'));
       return;
     }
-
     setStatus('loading');
-
     try {
-      // Simulate API call - Dans un vrai projet, connecter à same.new ou service email
-      await new Promise(resolve => setTimeout(resolve, 1000));
-
-      // For now, just simulate success
+      // Démo : à connecter à un service email (Resend, Mailchimp, etc.)
+      await new Promise((r) => setTimeout(r, 900));
       setStatus('success');
-      setMessage('Merci ! Vous êtes maintenant inscrit à notre newsletter.');
+      setMessage(t('home.newsletter.success'));
       setEmail('');
-
-      // Reset status after 3 seconds
       setTimeout(() => {
         setStatus('idle');
         setMessage('');
-      }, 3000);
-    } catch (error) {
+      }, 4000);
+    } catch {
       setStatus('error');
-      setMessage('Une erreur est survenue. Veuillez réessayer.');
+      setMessage(t('home.newsletter.error'));
     }
   };
 
   return (
-    <section className="py-20 bg-gray-50 relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 kente-pattern opacity-30"></div>
+    <section id="newsletter" className="border-t border-border">
+      <div className="mx-auto grid max-w-[1400px] gap-12 px-4 py-20 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-8 lg:py-28">
+        {/* Texte + avantages */}
+        <Reveal>
+          <h2 className="font-serif text-3xl text-foreground sm:text-4xl">{t('home.newsletter.title')}</h2>
+          <p className="mt-4 max-w-prose text-lg text-foreground/70">
+            {t('home.newsletter.description')}
+          </p>
+          <ul className="mt-8 space-y-5">
+            {perks.map(({ icon: Icon, key }) => (
+              <li key={key} className="flex items-start gap-4">
+                <span className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-secondary text-primary">
+                  <Icon className="h-5 w-5" />
+                </span>
+                <div>
+                  <p className="font-serif text-lg text-foreground">
+                    {t(`home.newsletter.perks.${key}.title`)}
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    {t(`home.newsletter.perks.${key}.desc`)}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <Card className="bg-white/80 backdrop-blur-sm border border-ivorian-orange-200 shadow-2xl">
-          <CardHeader className="text-center pb-8">
-            <div className="mx-auto mb-6">
-              <div className="w-20 h-20 bg-leke-red-500 rounded-full flex items-center justify-center shadow-lg">
-                <Mail className="h-10 w-10 text-white" />
-              </div>
-            </div>
-
-            <CardTitle className="text-3xl sm:text-4xl font-oswald font-bold text-gray-900 mb-4">
-              {t('home.newsletter.title')}
-            </CardTitle>
-
-            <CardDescription className="text-lg text-gray-600 font-ubuntu max-w-2xl mx-auto">
-              {t('home.newsletter.description')}
-            </CardDescription>
-          </CardHeader>
-
-          <CardContent className="pb-8">
-            <form onSubmit={handleSubmit} className="max-w-md mx-auto">
-              <div className="flex flex-col sm:flex-row gap-4">
+        {/* Formulaire */}
+        <Reveal className="lg:pt-2">
+          <div className="rounded-xl border border-border bg-card p-6 shadow-soft sm:p-8">
+            <form onSubmit={handleSubmit} noValidate className="space-y-2">
+              <label htmlFor="newsletter-email" className="block text-sm font-medium text-foreground">
+                {t('home.newsletter.placeholder')}
+              </label>
+              <div className="flex flex-col gap-3 sm:flex-row">
                 <Input
+                  id="newsletter-email"
                   type="email"
+                  inputMode="email"
+                  autoComplete="email"
                   placeholder={t('home.newsletter.placeholder')}
                   value={email}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
-                  className="flex-1 h-12 text-lg font-ubuntu"
+                  onChange={(e) => setEmail(e.target.value)}
                   disabled={status === 'loading'}
+                  className="h-12 flex-1 bg-background text-base"
                 />
-
                 <Button
                   type="submit"
                   disabled={status === 'loading'}
-                  className="btn-primary h-12 px-8 font-ubuntu font-semibold text-lg whitespace-nowrap"
+                  className="h-12 whitespace-nowrap px-7 text-base font-semibold"
                 >
                   {status === 'loading' ? (
-                    <div className="flex items-center space-x-2">
-                      <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                      <span>Inscription...</span>
-                    </div>
+                    <span className="flex items-center gap-2">
+                      <span className="h-4 w-4 animate-spin rounded-full border-2 border-primary-foreground/30 border-t-primary-foreground" />
+                      {t('home.newsletter.subscribing')}
+                    </span>
                   ) : (
                     t('home.newsletter.subscribe')
                   )}
                 </Button>
               </div>
 
-              {/* Status Message */}
-              {status !== 'idle' && message && (
-                <div className={`mt-4 p-3 rounded-lg flex items-center space-x-2 ${
-                  status === 'success'
-                    ? 'bg-green-50 text-green-700 border border-green-200'
-                    : 'bg-red-50 text-red-700 border border-red-200'
-                }`}>
+              {status !== 'idle' && status !== 'loading' && message && (
+                <div
+                  role="status"
+                  className={`mt-3 flex items-center gap-2 rounded-md border p-3 text-sm ${
+                    status === 'success'
+                      ? 'border-primary/30 bg-primary/5 text-primary'
+                      : 'border-destructive/30 bg-destructive/5 text-destructive'
+                  }`}
+                >
                   {status === 'success' ? (
-                    <CheckCircle className="h-5 w-5" />
+                    <CheckCircle2 className="h-5 w-5 shrink-0" />
                   ) : (
-                    <AlertCircle className="h-5 w-5" />
+                    <AlertCircle className="h-5 w-5 shrink-0" />
                   )}
-                  <span className="font-ubuntu">{message}</span>
+                  <span>{message}</span>
                 </div>
               )}
             </form>
-
-            {/* Newsletter Features */}
-            <div className="mt-12 grid sm:grid-cols-3 gap-6 text-center">
-              <div className="space-y-2">
-                <div className="w-12 h-12 bg-ivorian-orange-100 rounded-full flex items-center justify-center mx-auto">
-                  <span className="text-2xl">📰</span>
-                </div>
-                <h4 className="font-oswald font-semibold text-gray-900">Articles Exclusifs</h4>
-                <p className="text-sm text-gray-600 font-ubuntu">Contenu premium réservé aux abonnés</p>
-              </div>
-
-              <div className="space-y-2">
-                <div className="w-12 h-12 bg-ivorian-green-100 rounded-full flex items-center justify-center mx-auto">
-                  <span className="text-2xl">🎭</span>
-                </div>
-                <h4 className="font-oswald font-semibold text-gray-900">Événements</h4>
-                <p className="text-sm text-gray-600 font-ubuntu">Invitations en avant-première</p>
-              </div>
-
-              <div className="space-y-2">
-                <div className="w-12 h-12 bg-ivorian-yellow-100 rounded-full flex items-center justify-center mx-auto">
-                  <span className="text-2xl">🎨</span>
-                </div>
-                <h4 className="font-oswald font-semibold text-gray-900">Culture</h4>
-                <p className="text-sm text-gray-600 font-ubuntu">Insights culturels hebdomadaires</p>
-              </div>
-            </div>
-
-            {/* Privacy Note */}
-            <p className="text-xs text-gray-500 text-center mt-8 font-ubuntu">
-              Nous respectons votre vie privée. Vos données ne seront jamais partagées avec des tiers.
-            </p>
-          </CardContent>
-        </Card>
+            <p className="mt-5 text-xs text-muted-foreground">{t('home.newsletter.privacy')}</p>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

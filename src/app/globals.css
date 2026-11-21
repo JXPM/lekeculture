@@ -1,70 +1,66 @@
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&family=Oswald:wght@200;300;400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 20 14.3% 4.1%;
-    --card: 0 0% 100%;
-    --card-foreground: 20 14.3% 4.1%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 20 14.3% 4.1%;
+    /* Papier chaud type archive + encre brun-noir */
+    --background: 40 33% 94%;
+    --foreground: 28 24% 13%;
+    --card: 40 44% 97%;
+    --card-foreground: 28 24% 13%;
+    --popover: 40 44% 97%;
+    --popover-foreground: 28 24% 13%;
 
-    /* 🔴 Rouge principal et ses dérivés */
-    --primary: 2 93% 42%; /* #d60c07 */
-    --primary-foreground: 60 9.1% 97.8%;
-    --secondary: 60 4.8% 95.9%;
-    --secondary-foreground: 24 9.8% 10%;
+    /* Accent unique : rouge brique (lignée du rouge de marque), verrouillé */
+    --primary: 9 74% 41%;
+    --primary-foreground: 40 44% 97%;
 
-    --muted: 60 4.8% 95.9%;
-    --muted-foreground: 25 5.3% 44.7%;
-    --accent: 60 4.8% 95.9%;
-    --accent-foreground: 24 9.8% 10%;
-    --destructive: 2 93% 42%;
-    --destructive-foreground: 60 9.1% 97.8%;
-    --border: 20 5.9% 90%;
-    --input: 20 5.9% 90%;
-    --ring: 2 93% 42%;
-    --radius: 0.5rem;
+    --secondary: 38 28% 90%;
+    --secondary-foreground: 28 24% 16%;
 
-    /* Palette pour graphiques */
-    --chart-1: 2 80% 45%;  /* #d60c07 */
-    --chart-2: 4 70% 55%;  /* #e54a3f */
-    --chart-3: 5 60% 65%;  /* #f3756d */
-    --chart-4: 6 55% 75%;  /* #f7a19c */
-    --chart-5: 7 50% 85%;  /* #fbd0cd */
+    --muted: 38 26% 91%;
+    --muted-foreground: 30 9% 34%;
+
+    /* Accent neutre chaud pour les survols (distinct de la couleur de marque) */
+    --accent: 38 30% 88%;
+    --accent-foreground: 28 24% 16%;
+
+    --destructive: 0 68% 42%;
+    --destructive-foreground: 40 44% 97%;
+
+    --border: 36 22% 84%;
+    --input: 36 22% 80%;
+    --ring: 9 74% 41%;
+    --radius: 0.375rem;
   }
 
   .dark {
-    --background: 20 14.3% 4.1%;
-    --foreground: 60 9.1% 97.8%;
-    --card: 20 14.3% 4.1%;
-    --card-foreground: 60 9.1% 97.8%;
-    --popover: 20 14.3% 4.1%;
-    --popover-foreground: 60 9.1% 97.8%;
+    --background: 28 14% 9%;
+    --foreground: 40 30% 92%;
+    --card: 28 13% 12%;
+    --card-foreground: 40 30% 92%;
+    --popover: 28 13% 12%;
+    --popover-foreground: 40 30% 92%;
 
-    /* Variante sombre du rouge */
-    --primary: 2 80% 40%;
-    --primary-foreground: 60 9.1% 97.8%;
-    --secondary: 12 6.5% 15.1%;
-    --secondary-foreground: 60 9.1% 97.8%;
-    --muted: 12 6.5% 15.1%;
-    --muted-foreground: 24 5.4% 63.9%;
-    --accent: 12 6.5% 15.1%;
-    --accent-foreground: 60 9.1% 97.8%;
-    --destructive: 2 80% 40%;
-    --destructive-foreground: 60 9.1% 97.8%;
-    --border: 12 6.5% 15.1%;
-    --input: 12 6.5% 15.1%;
-    --ring: 2 93% 42%;
+    --primary: 10 76% 56%;
+    --primary-foreground: 28 24% 10%;
 
-    --chart-1: 2 80% 45%;
-    --chart-2: 4 70% 55%;
-    --chart-3: 5 60% 65%;
-    --chart-4: 6 55% 75%;
-    --chart-5: 7 50% 85%;
+    --secondary: 28 10% 18%;
+    --secondary-foreground: 40 30% 92%;
+
+    --muted: 28 10% 18%;
+    --muted-foreground: 36 12% 66%;
+
+    --accent: 28 10% 20%;
+    --accent-foreground: 40 30% 92%;
+
+    --destructive: 0 65% 52%;
+    --destructive-foreground: 40 30% 96%;
+
+    --border: 28 10% 20%;
+    --input: 28 10% 22%;
+    --ring: 10 76% 56%;
   }
 }
 
@@ -73,70 +69,114 @@
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    @apply bg-background text-foreground font-ubuntu;
+    @apply bg-background text-foreground font-sans antialiased;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-oswald;
+    @apply font-serif;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.08;
+  }
+
+  ::selection {
+    background-color: hsl(var(--primary) / 0.16);
+    color: hsl(var(--primary));
+  }
+
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
   }
 }
 
 @layer components {
-  /* 🎨 Dégradé sombre et élégant pour la hero section */
-  .hero-gradient {
-    background: linear-gradient(
-      135deg,
-      rgba(0, 0, 0, 0.6) 0%,
-      rgba(0, 0, 0, 0.4) 50%,
-      rgba(0, 0, 0, 0.6) 100%
-    );
+  /* Étiquette éditoriale (eyebrow). À utiliser avec parcimonie. */
+  .eyebrow {
+    @apply inline-block text-[0.7rem] font-medium uppercase tracking-[0.2em] text-muted-foreground;
   }
 
-  /* 🔴 Motif culturel avec la nouvelle palette rouge */
-  .cultural-pattern {
-    background-image:
-      radial-gradient(circle at 25% 25%, rgba(214, 12, 7, 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 75% 75%, rgba(229, 74, 63, 0.08) 0%, transparent 50%),
-      radial-gradient(circle at 50% 50%, rgba(243, 117, 109, 0.05) 0%, transparent 50%);
+  /* Filet d'accent fin (remplace les anciens « dividers ») */
+  .rule-accent {
+    @apply block h-px w-12 bg-primary;
   }
 
-  /* ✨ Texte en dégradé rouge profond */
-  .text-gradient {
-    background: linear-gradient(135deg, #d60c07, #b50a06, #8f0805);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  /* Lien éditorial avec soulignement animé */
+  .link-underline {
+    @apply relative inline-flex items-center text-foreground transition-colors hover:text-primary;
+  }
+  .link-underline::after {
+    content: "";
+    @apply absolute -bottom-0.5 left-0 h-px w-full origin-right scale-x-0 bg-current transition-transform duration-300;
+  }
+  .link-underline:hover::after {
+    @apply origin-left scale-x-100;
   }
 
-  /* 🔘 Bouton principal */
-  .btn-primary {
-    @apply text-white transition-all duration-300 transform hover:scale-105;
-    background: linear-gradient(135deg, #d60c07, #b50a06);
+  /* Paragraphe d'introduction */
+  .lede {
+    @apply max-w-prose text-lg leading-relaxed text-foreground/80 sm:text-xl;
   }
 
-  .btn-primary:hover {
-    background: linear-gradient(135deg, #b50a06, #8f0805);
+  /* Apparition au défilement (piloté par le composant Reveal + IntersectionObserver) */
+  .reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
   }
 
-  /* ⚫ Bouton secondaire */
-  .btn-secondary {
-    @apply bg-gray-700 hover:bg-gray-800 text-white transition-all duration-300 transform hover:scale-105;
+  /* ----- Compat : classes héritées, redessinées dans le langage éditorial ----- */
+
+  .section-eyebrow {
+    @apply inline-block text-[0.7rem] font-medium uppercase tracking-[0.2em] text-primary;
   }
 
-  /* 🪶 Carte avec bordure rouge élégante */
+  .divider-accent {
+    @apply h-px w-12 bg-primary;
+  }
+
+  /* Carte éditoriale : surface papier, filet, ombre chaude discrète */
   .card-cultural {
-    @apply bg-white/95 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1;
-    border: 1px solid rgba(214, 12, 7, 0.2);
+    @apply rounded-lg border border-border bg-card text-card-foreground shadow-soft transition-all duration-300;
+  }
+  .card-cultural:hover {
+    @apply -translate-y-0.5 border-primary/30 shadow-lift;
   }
 
-  /* 🖋️ Logo avec ton rouge principal */
-  .logo-gradient {
-    background: linear-gradient(135deg, #d60c07, #b50a06);
+  /* Bouton de marque plein (sans dégradé ni halo) */
+  .btn-primary {
+    @apply bg-primary text-primary-foreground transition-colors duration-200;
   }
-
-  /* 🌅 Accent dégradé doux autour du rouge principal */
-  .accent-gradient {
-    background: linear-gradient(135deg, #d60c07, #e54a3f, #f3756d);
+  .btn-primary:hover {
+    @apply bg-primary/90;
   }
 }

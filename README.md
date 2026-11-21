@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Leke Culture
 
-## Getting Started
+Site vitrine célébrant la culture ivoirienne et africaine — articles, événements,
+galerie, tour virtuel et communauté. Bilingue **FR / EN**, responsive, avec
+notifications push (PWA).
 
-First, run the development server:
+## Stack
+
+- **Next.js 15** (App Router) + **React 18**
+- **TypeScript**
+- **Tailwind CSS** + **shadcn/ui** (Radix)
+- **Vitest** (tests unitaires)
+- Police : Oswald (titres) + Ubuntu (texte), via `next/font`
+- Déploiement : **Vercel**
+
+## Démarrage
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+bun install        # ou npm install
+bun run dev        # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Scripts
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Commande         | Description                          |
+| ---------------- | ----------------------------------- |
+| `bun run dev`    | Serveur de développement (Turbopack) |
+| `bun run build`  | Build de production                  |
+| `bun run start`  | Sert le build de production          |
+| `bun run lint`   | Typecheck (`tsc`) + ESLint           |
+| `bun run test`   | Tests unitaires (Vitest)             |
+| `bun run format` | Formatage (Biome)                    |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Structure
 
-## Learn More
+```
+src/
+├── app/         # Pages : accueil, about, insights, gallery, virtual-tour, community
+├── components/  # Navigation, Hero, Footer, NotificationSettings, ui/*
+├── contexts/    # LanguageContext (FR/EN)
+└── lib/         # translations, notifications (logique push), utils
+public/
+├── sw.js        # Service Worker (cache + push)
+└── icons/       # Icône SVG + manifest PWA
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Design system
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+La palette et les tokens sont définis dans `tailwind.config.ts` et
+`src/app/globals.css` : rouge de marque `#d60c07`, ocre/or et vert ivoiriens,
+fond ivoire. Les motifs `kente-pattern` / `adinkra-pattern` et l'échelle
+`leke-*` (alias `ivorian-*`) sont disponibles comme utilitaires.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Déploiement
 
-## Deploy on Vercel
+Projet déployé sur Vercel.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+vercel        # preview
+vercel --prod # production
+```

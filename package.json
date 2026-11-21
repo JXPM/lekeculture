@@ -1,5 +1,5 @@
 {
-  "name": "nextjs-shadcn",
+  "name": "leke-culture",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "bunx tsc --noEmit && next lint",
-    "format": "bunx biome format --write"
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "format": "bunx biome format --write",
+    "migrate": "node --env-file=.env.local scripts/migrate.mjs"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.15",
@@ -17,10 +20,12 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.544.0",
-    "next": "^15.3.2",
+    "next": "15.5.19",
+    "pg": "^8.23.1",
+    "qrcode": "^1.5.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "same-runtime": "^0.0.1",
+    "server-only": "^0.0.1",
     "tailwind-merge": "^3.3.1",
     "tailwindcss-animate": "^1.0.7"
   },
@@ -28,12 +33,17 @@
     "@biomejs/biome": "1.9.4",
     "@eslint/eslintrc": "^3.3.1",
     "@types/node": "^20.17.50",
+    "@types/pg": "^8.23.1",
+    "@types/qrcode": "^1.5.6",
     "@types/react": "^18.3.22",
     "@types/react-dom": "^18.3.7",
+    "@vitejs/plugin-react": "^6.0.2",
     "eslint": "^9.27.0",
-    "eslint-config-next": "15.1.7",
+    "eslint-config-next": "15.5.19",
     "postcss": "^8.5.3",
     "tailwindcss": "^3.4.17",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "vite-tsconfig-paths": "^6.1.1",
+    "vitest": "^4.1.8"
   }
 }

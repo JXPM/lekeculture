@@ -1,5 +1,47 @@
 import type { Config } from "tailwindcss";
 
+/**
+ * Leke — Design System (héritage éditorial)
+ *
+ * Direction : magazine / archive culturelle pan-africaine sur fond papier chaud.
+ * Typo de titrage en serif éditorial (Newsreader), texte en grotesque (Hanken Grotesk).
+ * Accent unique : un rouge brique (lignée du rouge de marque), verrouillé sur tout le site.
+ *
+ * Les échelles `leke.*` / `ivorian.*` sont conservées pour la compatibilité de
+ * composants secondaires (paramètres de notifications). Les surfaces éditoriales
+ * utilisent les tokens sémantiques (`background`, `foreground`, `primary`, …).
+ */
+
+const red = {
+  50: "#fdf3f1", 100: "#fbe3de", 200: "#f6c4bb", 300: "#ec9a8c",
+  400: "#dd6753", 500: "#c0392b", 600: "#a82c20", 700: "#8a2118",
+  800: "#6f1c15", 900: "#5c1a14",
+} as const;
+
+const orange = {
+  50: "#fff7ed", 100: "#ffedd5", 200: "#fed7aa", 300: "#fdba74",
+  400: "#fb923c", 500: "#f97316", 600: "#ea580c", 700: "#c2410c",
+  800: "#9a3412", 900: "#7c2d12",
+} as const;
+
+const green = {
+  50: "#f1f7f2", 100: "#dcebe0", 200: "#bcd8c4",
+  300: "#8fbd9d", 400: "#5d9b71", 500: "#3c7d54", 600: "#2f6543",
+  700: "#274f37", 800: "#21402e", 900: "#1c3527",
+} as const;
+
+const yellow = {
+  50: "#fdf8e8", 100: "#fef3c7", 200: "#fde68a", 300: "#fcd34d",
+  400: "#facc15", 500: "#eab308", 600: "#ca8a04", 700: "#a16207",
+  800: "#854d0e", 900: "#713f12",
+} as const;
+
+const gold = {
+  50: "#fbf7ee", 100: "#f5ead0", 200: "#ebd29c", 300: "#dfb766",
+  400: "#cf9d3f", 500: "#b67f28", 600: "#9a6620", 700: "#7c4f1d",
+  800: "#67411e", 900: "#58371d",
+} as const;
+
 const config: Config = {
   darkMode: ["class"],
   content: [
@@ -12,135 +54,59 @@ const config: Config = {
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-        card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
-        },
-        popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
-        },
-        primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
-        },
-        secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
-        },
-        muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
-        },
-        accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
-        },
-        destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
-        },
+        card: { DEFAULT: "hsl(var(--card))", foreground: "hsl(var(--card-foreground))" },
+        popover: { DEFAULT: "hsl(var(--popover))", foreground: "hsl(var(--popover-foreground))" },
+        primary: { DEFAULT: "hsl(var(--primary))", foreground: "hsl(var(--primary-foreground))" },
+        secondary: { DEFAULT: "hsl(var(--secondary))", foreground: "hsl(var(--secondary-foreground))" },
+        muted: { DEFAULT: "hsl(var(--muted))", foreground: "hsl(var(--muted-foreground))" },
+        accent: { DEFAULT: "hsl(var(--accent))", foreground: "hsl(var(--accent-foreground))" },
+        destructive: { DEFAULT: "hsl(var(--destructive))", foreground: "hsl(var(--destructive-foreground))" },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        chart: {
-          "1": "hsl(var(--chart-1))",
-          "2": "hsl(var(--chart-2))",
-          "3": "hsl(var(--chart-3))",
-          "4": "hsl(var(--chart-4))",
-          "5": "hsl(var(--chart-5))",
-        },
-        // Couleurs Leke Culture avec rouge principal
-        'leke': {
-          red: {
-            50: '#fef2f2',
-            100: '#fee2e2',
-            200: '#fecaca',
-            300: '#fca5a5',
-            400: '#f87171',
-            500: '#ef4444', // Rouge principal du logo
-            600: '#dc2626',
-            700: '#b91c1c',
-            800: '#991b1b',
-            900: '#7f1d1d',
-          },
-          orange: {
-            50: '#fff7ed',
-            100: '#ffedd5',
-            200: '#fed7aa',
-            300: '#fdba74',
-            400: '#fb923c',
-            500: '#f97316', // Orange ivoirien
-            600: '#ea580c',
-            700: '#c2410c',
-            800: '#9a3412',
-            900: '#7c2d12',
-          },
-          green: {
-            50: '#f0fdf4',
-            100: '#dcfce7',
-            200: '#bbf7d0',
-            300: '#86efac',
-            400: '#4ade80',
-            500: '#22c55e', // Vert ivoirien
-            600: '#16a34a',
-            700: '#15803d',
-            800: '#166534',
-            900: '#14532d',
-          },
-          yellow: {
-            50: '#fefce8',
-            100: '#fef9c3',
-            200: '#fef08a',
-            300: '#fde047',
-            400: '#facc15',
-            500: '#eab308', // Jaune ivoirien
-            600: '#ca8a04',
-            700: '#a16207',
-            800: '#854d0e',
-            900: '#713f12',
-          },
-          gold: {
-            50: '#fffbeb',
-            100: '#fef3c7',
-            200: '#fde68a',
-            300: '#fcd34d',
-            400: '#fbbf24',
-            500: '#f59e0b',
-            600: '#d97706',
-            700: '#b45309',
-            800: '#92400e',
-            900: '#78350f',
-          }
-        }
+        // Papier / encre : surfaces éditoriales nommées
+        paper: "hsl(var(--background))",
+        ink: "hsl(var(--foreground))",
+        // Échelles de marque (compat)
+        leke: { red, orange, green, yellow, gold },
+        ivorian: { orange, green, yellow, gold, red },
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
-      },
-      backgroundImage: {
-        'kente-pattern': "url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23ef4444\" fill-opacity=\"0.1\"%3E%3Crect width=\"11\" height=\"11\"/%3E%3Crect x=\"49\" width=\"11\" height=\"11\"/%3E%3Crect y=\"49\" width=\"11\" height=\"11\"/%3E%3Crect x=\"49\" y=\"49\" width=\"11\" height=\"11\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')",
-        'adinkra-pattern': "url('data:image/svg+xml,%3Csvg width=\"40\" height=\"40\" viewBox=\"0 0 40 40\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"%2322c55e\" fill-opacity=\"0.05\"%3E%3Cpath d=\"M20 20c0-11.046-8.954-20-20-20s-20 8.954-20 20 8.954 20 20 20 20-8.954 20-20zm-2 0c0 9.941-8.059 18-18 18s-18-8.059-18-18 8.059-18 18-18 18 8.059 18 18z\"/%3E%3C/g%3E%3C/svg%3E')",
-        'hero-gradient': 'linear-gradient(135deg, #ef4444 0%, #dc2626 50%, #b91c1c 100%)',
+        sm: "calc(var(--radius) - 3px)",
+        xl: "calc(var(--radius) + 4px)",
+        "2xl": "calc(var(--radius) + 10px)",
       },
       fontFamily: {
-        'ubuntu': ['Ubuntu', 'system-ui', 'sans-serif'],
-        'oswald': ['Oswald', 'system-ui', 'sans-serif'],
+        // Sémantique
+        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+        serif: ["var(--font-display)", "Georgia", "serif"],
+        display: ["var(--font-display)", "Georgia", "serif"],
+        // Alias rétro-compatibles (mappés vers la nouvelle identité)
+        oswald: ["var(--font-display)", "Georgia", "serif"],
+        ubuntu: ["var(--font-sans)", "system-ui", "sans-serif"],
+      },
+      letterSpacing: {
+        tightish: "-0.015em",
+      },
+      boxShadow: {
+        // Ombres chaudes et discrètes, teintées vers l'encre (pas de noir pur)
+        soft: "0 1px 2px rgb(45 32 22 / 0.04), 0 8px 24px -12px rgb(45 32 22 / 0.14)",
+        lift: "0 2px 4px rgb(45 32 22 / 0.05), 0 18px 40px -16px rgb(45 32 22 / 0.22)",
+      },
+      maxWidth: {
+        prose: "68ch",
       },
       animation: {
-        'fade-in': 'fade-in 0.5s ease-in-out',
-        'slide-up': 'slide-up 0.5s ease-out',
-        'bounce-slow': 'bounce 2s infinite',
+        "fade-in": "fade-in 0.7s ease-out both",
+        "rise": "rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both",
       },
       keyframes: {
-        'fade-in': {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
-        },
-        'slide-up': {
-          '0%': { transform: 'translateY(100px)', opacity: '0' },
-          '100%': { transform: 'translateY(0)', opacity: '1' },
+        "fade-in": { "0%": { opacity: "0" }, "100%": { opacity: "1" } },
+        rise: {
+          "0%": { transform: "translateY(24px)", opacity: "0" },
+          "100%": { transform: "translateY(0)", opacity: "1" },
         },
       },
     },

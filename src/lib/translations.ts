@@ -1,172 +1,337 @@
 export const translations = {
   fr: {
+    common: {
+      readMore: "Lire",
+      explore: "Explorer",
+      viewAll: "Tout voir",
+      joinCommunity: "Rejoindre",
+      by: "par",
+      minRead: "min de lecture",
+      loading: "Chargement",
+      backToHome: "Retour à l'accueil",
+      language: "Langue",
+    },
     nav: {
       home: "Accueil",
-      about: "Qui sommes-nous",
-      insights: "Insights Culturels",
-      community: "Rejoindre la Communauté",
-      language: "Langue"
+      about: "Le projet",
+      insights: "Récits",
+      gallery: "Galerie",
+      virtualTour: "Lieux",
+      community: "Communauté",
+      events: "Événements",
+      language: "Langue",
     },
     hero: {
-      title: "Leke Culture",
-      subtitle: "Art, Tradition et Fierté Africaine",
-      description: "Découvrez la richesse de la culture ivoirienne et africaine à travers nos articles, événements et communauté passionnée.",
-      explore: "Explorer la Culture",
-      join: "Rejoindre la Communauté"
+      kicker: "Le magazine des cultures africaines",
+      titleLine1: "Les cultures",
+      titleLine2: "africaines, vivantes",
+      subtitle:
+        "Patrimoine, textiles, musiques et modes de vie du continent et de sa diaspora, racontés avec soin.",
+      ctaPrimary: "Lire les récits",
+      ctaSecondary: "Découvrir le projet",
     },
     home: {
-      insights: "Insights Culturels",
-      insightsDesc: "Découvrez les derniers articles sur la culture ivoirienne",
-      categories: {
-        dance: "Danse",
-        art: "Art",
-        music: "Musique",
-        history: "Histoire",
-        crafts: "Artisanat"
+      manifesto: {
+        title: "Une archive vivante, pas un musée poussiéreux",
+        body: "Leke réunit récits, photographies et voix pour montrer l'Afrique telle qu'elle se vit aujourd'hui : héritée, réinventée, partagée d'un bout à l'autre du continent et au-delà.",
+      },
+      rubriques: {
+        title: "Par où commencer",
+        intro: "Six rubriques pour traverser le continent sans le réduire à un cliché.",
+      },
+      stories: {
+        title: "À lire en ce moment",
+        intro: "Nos récits les plus récents, du patrimoine bâti aux scènes d'aujourd'hui.",
+      },
+      gallery: {
+        title: "Vu par la communauté",
+        intro: "Un aperçu des images partagées dans la galerie.",
+      },
+      cta: {
+        title: "Faites partie de la conversation",
+        body: "Rejoignez une communauté qui documente, célèbre et transmet les cultures africaines.",
+        button: "Rejoindre la communauté",
       },
       newsletter: {
-        title: "Restez connecté",
-        description: "Recevez les dernières nouvelles culturelles directement dans votre boîte mail",
+        title: "Le rendez-vous hebdomadaire",
+        description: "Un récit, une image, un événement. Chaque semaine, dans votre boîte mail.",
         placeholder: "Votre adresse email",
-        subscribe: "S'abonner"
+        subscribe: "S'abonner",
+        subscribing: "Inscription",
+        success: "Merci. Vous êtes bien inscrit à la lettre Leke.",
+        invalid: "Veuillez entrer une adresse email valide.",
+        error: "Une erreur est survenue. Veuillez réessayer.",
+        privacy: "Nous respectons votre vie privée. Vos données ne sont jamais revendues.",
+        perks: {
+          stories: { title: "Récits", desc: "Nos meilleurs articles en avant-première" },
+          events: { title: "Événements", desc: "Les rendez-vous culturels près de vous" },
+          culture: { title: "Coulisses", desc: "Les choix de la rédaction chaque semaine" },
+        },
       },
-      features: {
-        title: "Explorez notre culture",
-        dance: {
-          title: "Danse Zaouli",
-          description: "Découvrez la danse traditionnelle Zaouli, symbole de beauté féminine"
-        },
-        art: {
-          title: "Art Traditionnel",
-          description: "Explorez l'artisanat ivoirien, des masques aux textiles"
-        },
-        music: {
-          title: "Musique & Rythmes",
-          description: "Immergez-vous dans les rythmes authentiques de Côte d'Ivoire"
-        }
-      }
     },
     about: {
-      title: "Notre Mission",
-      description: "Préserver, promouvoir et partager la richesse culturelle de la Côte d'Ivoire",
-      timeline: {
-        title: "Histoire Culturelle Ivoirienne",
-        items: [
-          {
-            year: "Antiquité",
-            title: "Origines Ancestrales",
-            description: "Les premières civilisations s'établissent en Côte d'Ivoire"
-          },
-          {
-            year: "Moyen Âge",
-            title: "Royaumes Traditionnels",
-            description: "Émergence des grands royaumes Baoulé, Agni et autres"
-          },
-          {
-            year: "Époque Moderne",
-            title: "Renaissance Culturelle",
-            description: "Revitalisation et préservation des traditions"
-          }
-        ]
-      }
+      title: "Le projet Leke",
+      intro:
+        "Leke est un magazine indépendant qui documente les cultures vivantes de l'Afrique et de sa diaspora, sans hiérarchie entre les pays ni entre les époques.",
+      pillars: {
+        mission: {
+          title: "Notre mission",
+          body: "Raconter les cultures africaines avec justesse et profondeur, en donnant la parole à celles et ceux qui les font vivre.",
+        },
+        vision: {
+          title: "Notre vision",
+          body: "Un continent regardé pour sa pluralité et sa modernité, relié à sa diaspora par des récits partagés.",
+        },
+        values: {
+          title: "Nos valeurs",
+          body: "Rigueur, respect des sources, et fierté assumée. Pas de folklore figé, pas de regard surplombant.",
+        },
+      },
+      approach: {
+        title: "Notre façon de travailler",
+        body: "Chaque récit part d'une rencontre, d'un objet ou d'un lieu. Nous croisons les sources, citons les auteurs des images et donnons le contexte. La culture n'est pas un décor : c'est une parole que l'on relaie.",
+      },
+      team: {
+        title: "La rédaction",
+        intro: "Une petite équipe répartie sur plusieurs fuseaux, réunie autour d'une même exigence.",
+      },
+    },
+    insights: {
+      title: "Récits",
+      intro: "Reportages, portraits et enquêtes sur les cultures du continent et de sa diaspora.",
+      searchPlaceholder: "Chercher un récit, un auteur, un pays",
+      all: "Tous",
+      featured: "À la une",
+      latest: "Tous les récits",
+      empty: "Aucun récit ne correspond à votre recherche.",
+    },
+    gallery: {
+      title: "Galerie",
+      intro: "Des images du continent, partagées et créditées. La culture vue de l'intérieur.",
+      featured: "Sélection",
+      all: "Toutes les images",
+      contribute: "Proposer une image",
+    },
+    places: {
+      title: "Lieux",
+      intro: "Un parcours à travers des hauts lieux du patrimoine africain, du Sahel à la corne du continent.",
+      eraLabel: "Période",
+      note: "Sélection éditoriale. D'autres lieux rejoindront ce parcours.",
     },
     community: {
-      title: "Rejoignez Notre Communauté",
-      whatsapp: {
-        title: "Groupe WhatsApp",
-        description: "Connectez-vous avec d'autres passionnés de culture ivoirienne",
-        join: "Rejoindre le groupe"
+      title: "La communauté Leke",
+      intro: "Un cercle de passionnés qui documentent, débattent et célèbrent les cultures africaines.",
+      why: { title: "Pourquoi nous rejoindre" },
+      benefits: {
+        discuss: { title: "Échanges", desc: "Des discussions thématiques entre membres" },
+        live: { title: "Rencontres live", desc: "Des sessions en direct avec nos contributeurs" },
+        premium: { title: "Récits en avance", desc: "Nos articles avant tout le monde" },
+        events: { title: "Invitations", desc: "Les événements partenaires en priorité" },
       },
-      events: {
-        title: "Événements à venir",
-        description: "Participez à nos meetups, festivals et célébrations culturelles"
-      }
-    }
+      form: {
+        title: "Rejoindre le cercle",
+        description: "Laissez vos coordonnées, nous vous envoyons l'invitation.",
+        name: "Nom complet",
+        namePlaceholder: "Votre nom complet",
+        email: "Email",
+        emailPlaceholder: "vous@email.com",
+        whatsapp: "Numéro WhatsApp",
+        whatsappPlaceholder: "+221 XX XXX XX XX",
+        interests: "Centres d'intérêt",
+        interestsPlaceholder: "Textiles, musiques, patrimoine",
+        submit: "Recevoir l'invitation",
+        submitting: "Envoi",
+        success: "Merci. Vous recevrez bientôt votre invitation.",
+        error: "Une erreur est survenue. Veuillez réessayer.",
+        note: "En vous inscrivant, vous acceptez de recevoir nos messages sur les récits et événements Leke.",
+      },
+      instagram: {
+        title: "Suivez-nous au quotidien",
+        body: "Les images, les coulisses et les annonces sont d'abord sur Instagram.",
+        button: "Voir sur Instagram",
+      },
+    },
+    footer: {
+      tagline: "Les cultures africaines, vivantes. Patrimoine, textiles, musiques et modes de vie du continent et de sa diaspora.",
+      explore: "Explorer",
+      rubriques: "Rubriques",
+      follow: "Suivre",
+      contact: "Contact",
+      newsletterPrompt: "Recevez la lettre hebdomadaire.",
+      newsletterButton: "S'abonner",
+      rights: "Tous droits réservés.",
+      madeWith: "Fait avec soin pour les cultures africaines.",
+      privacy: "Confidentialité",
+      terms: "Mentions légales",
+    },
   },
+
   en: {
+    common: {
+      readMore: "Read",
+      explore: "Explore",
+      viewAll: "View all",
+      joinCommunity: "Join",
+      by: "by",
+      minRead: "min read",
+      loading: "Loading",
+      backToHome: "Back to home",
+      language: "Language",
+    },
     nav: {
       home: "Home",
-      about: "About Us",
-      insights: "Cultural Insights",
-      community: "Join Community",
-      language: "Language"
+      about: "The project",
+      insights: "Stories",
+      gallery: "Gallery",
+      virtualTour: "Places",
+      community: "Community",
+      events: "Events",
+      language: "Language",
     },
     hero: {
-      title: "Leke Culture",
-      subtitle: "Art, Tradition and African Pride",
-      description: "Discover the richness of Ivorian and African culture through our articles, events and passionate community.",
-      explore: "Explore Culture",
-      join: "Join Community"
+      kicker: "The magazine of African cultures",
+      titleLine1: "African cultures,",
+      titleLine2: "alive and now",
+      subtitle:
+        "Heritage, textiles, music and ways of life from across the continent and its diaspora, told with care.",
+      ctaPrimary: "Read the stories",
+      ctaSecondary: "About the project",
     },
     home: {
-      insights: "Cultural Insights",
-      insightsDesc: "Discover the latest articles on Ivorian culture",
-      categories: {
-        dance: "Dance",
-        art: "Art",
-        music: "Music",
-        history: "History",
-        crafts: "Crafts"
+      manifesto: {
+        title: "A living archive, not a dusty museum",
+        body: "Leke brings together stories, photography and voices to show Africa as it is lived today: inherited, reinvented and shared from one end of the continent to the other and beyond.",
+      },
+      rubriques: {
+        title: "Where to begin",
+        intro: "Six sections to cross the continent without flattening it into a cliché.",
+      },
+      stories: {
+        title: "Reading right now",
+        intro: "Our latest stories, from built heritage to today's scenes.",
+      },
+      gallery: {
+        title: "Seen by the community",
+        intro: "A glimpse of the images shared in the gallery.",
+      },
+      cta: {
+        title: "Be part of the conversation",
+        body: "Join a community that documents, celebrates and passes on African cultures.",
+        button: "Join the community",
       },
       newsletter: {
-        title: "Stay Connected",
-        description: "Receive the latest cultural news directly in your inbox",
+        title: "The weekly dispatch",
+        description: "One story, one image, one event. Every week, in your inbox.",
         placeholder: "Your email address",
-        subscribe: "Subscribe"
+        subscribe: "Subscribe",
+        subscribing: "Subscribing",
+        success: "Thank you. You are subscribed to the Leke letter.",
+        invalid: "Please enter a valid email address.",
+        error: "Something went wrong. Please try again.",
+        privacy: "We respect your privacy. Your data is never sold.",
+        perks: {
+          stories: { title: "Stories", desc: "Our best pieces, ahead of everyone" },
+          events: { title: "Events", desc: "Cultural gatherings near you" },
+          culture: { title: "Behind the scenes", desc: "The editors' picks every week" },
+        },
       },
-      features: {
-        title: "Explore our culture",
-        dance: {
-          title: "Zaouli Dance",
-          description: "Discover the traditional Zaouli dance, symbol of feminine beauty"
-        },
-        art: {
-          title: "Traditional Art",
-          description: "Explore Ivorian craftsmanship, from masks to textiles"
-        },
-        music: {
-          title: "Music & Rhythms",
-          description: "Immerse yourself in the authentic rhythms of Côte d'Ivoire"
-        }
-      }
     },
     about: {
-      title: "Our Mission",
-      description: "Preserve, promote and share the cultural richness of Côte d'Ivoire",
-      timeline: {
-        title: "Ivorian Cultural History",
-        items: [
-          {
-            year: "Ancient Times",
-            title: "Ancestral Origins",
-            description: "The first civilizations established in Côte d'Ivoire"
-          },
-          {
-            year: "Middle Ages",
-            title: "Traditional Kingdoms",
-            description: "Emergence of the great Baoulé, Agni and other kingdoms"
-          },
-          {
-            year: "Modern Era",
-            title: "Cultural Renaissance",
-            description: "Revitalization and preservation of traditions"
-          }
-        ]
-      }
+      title: "The Leke project",
+      intro:
+        "Leke is an independent magazine documenting the living cultures of Africa and its diaspora, with no hierarchy between countries or between eras.",
+      pillars: {
+        mission: {
+          title: "Our mission",
+          body: "To tell African cultures with accuracy and depth, giving voice to the people who keep them alive.",
+        },
+        vision: {
+          title: "Our vision",
+          body: "A continent seen for its plurality and modernity, linked to its diaspora through shared stories.",
+        },
+        values: {
+          title: "Our values",
+          body: "Rigour, respect for sources, and unapologetic pride. No frozen folklore, no top-down gaze.",
+        },
+      },
+      approach: {
+        title: "How we work",
+        body: "Every story starts with an encounter, an object or a place. We cross-check sources, credit image authors and give context. Culture is not a backdrop: it is a voice we relay.",
+      },
+      team: {
+        title: "The editors",
+        intro: "A small team across several time zones, united by one standard.",
+      },
+    },
+    insights: {
+      title: "Stories",
+      intro: "Reporting, portraits and investigations into the cultures of the continent and its diaspora.",
+      searchPlaceholder: "Search a story, an author, a country",
+      all: "All",
+      featured: "Featured",
+      latest: "All stories",
+      empty: "No story matches your search.",
+    },
+    gallery: {
+      title: "Gallery",
+      intro: "Images from the continent, shared and credited. Culture seen from the inside.",
+      featured: "Selection",
+      all: "All images",
+      contribute: "Submit an image",
+    },
+    places: {
+      title: "Places",
+      intro: "A journey through landmarks of African heritage, from the Sahel to the Horn of the continent.",
+      eraLabel: "Period",
+      note: "An editorial selection. More places will join this journey.",
     },
     community: {
-      title: "Join Our Community",
-      whatsapp: {
-        title: "WhatsApp Group",
-        description: "Connect with other Ivorian culture enthusiasts",
-        join: "Join the group"
+      title: "The Leke community",
+      intro: "A circle of enthusiasts who document, debate and celebrate African cultures.",
+      why: { title: "Why join" },
+      benefits: {
+        discuss: { title: "Conversations", desc: "Themed discussions between members" },
+        live: { title: "Live meetups", desc: "Live sessions with our contributors" },
+        premium: { title: "Early stories", desc: "Our articles before anyone else" },
+        events: { title: "Invitations", desc: "Partner events, first" },
       },
-      events: {
-        title: "Upcoming Events",
-        description: "Participate in our meetups, festivals and cultural celebrations"
-      }
-    }
-  }
+      form: {
+        title: "Join the circle",
+        description: "Leave your details and we will send the invitation.",
+        name: "Full name",
+        namePlaceholder: "Your full name",
+        email: "Email",
+        emailPlaceholder: "you@email.com",
+        whatsapp: "WhatsApp number",
+        whatsappPlaceholder: "+221 XX XXX XX XX",
+        interests: "Interests",
+        interestsPlaceholder: "Textiles, music, heritage",
+        submit: "Get the invitation",
+        submitting: "Sending",
+        success: "Thank you. You will receive your invitation soon.",
+        error: "Something went wrong. Please try again.",
+        note: "By joining, you agree to receive our messages about Leke stories and events.",
+      },
+      instagram: {
+        title: "Follow us day to day",
+        body: "Images, behind the scenes and announcements land on Instagram first.",
+        button: "View on Instagram",
+      },
+    },
+    footer: {
+      tagline: "African cultures, alive. Heritage, textiles, music and ways of life from the continent and its diaspora.",
+      explore: "Explore",
+      rubriques: "Sections",
+      follow: "Follow",
+      contact: "Contact",
+      newsletterPrompt: "Get the weekly letter.",
+      newsletterButton: "Subscribe",
+      rights: "All rights reserved.",
+      madeWith: "Made with care for African cultures.",
+      privacy: "Privacy",
+      terms: "Legal",
+    },
+  },
 } as const;
 
 export type Language = keyof typeof translations;

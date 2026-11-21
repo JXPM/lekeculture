@@ -1,5 +1,6 @@
 import { HeroSection } from "@/components/HeroSection";
 import { FeaturesSection } from "@/components/FeaturesSection";
+import { FeaturedStories, GalleryStrip, JoinBand } from "@/components/HomeSections";
 import { NewsletterSection } from "@/components/NewsletterSection";
 
 export default function Home() {
@@ -7,9 +8,10 @@ export default function Home() {
     <>
       <HeroSection />
       <FeaturesSection />
-      <div id="newsletter">
-        <NewsletterSection />
-      </div>
+      <FeaturedStories />
+      <GalleryStrip />
+      <JoinBand />
+      <NewsletterSection />
     </>
   );
 }
