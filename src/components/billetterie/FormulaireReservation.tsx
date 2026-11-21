@@ -16,12 +16,21 @@ export function FormulaireReservation({ evenement, ouvert }: { evenement: string
   const [message, setMessage] = useState('');
   const [ticketExistant, setTicketExistant] = useState<string | null>(null);
 
+  // Ticket déjà pris sur ce téléphone : on vérifie qu'il existe toujours (sinon on l'oublie).
   useEffect(() => {
+    let code: string | null = null;
     try {
-      setTicketExistant(localStorage.getItem(cleLocale(evenement)));
+      code = localStorage.getItem(cleLocale(evenement));
     } catch {
-      /* navigation privée */
+      return; /* navigation privée */
     }
+    if (!code) return;
+    fetch(`/api/billetterie/statut?code=${encodeURIComponent(code)}`, { cache: 'no-store' })
+      .then((r) => {
+        if (r.ok) setTicketExistant(code);
+        else if (r.status === 404) localStorage.removeItem(cleLocale(evenement));
+      })
+      .catch(() => setTicketExistant(code));
   }, [evenement]);
 
   async function envoyer(e: FormEvent<HTMLFormElement>) {

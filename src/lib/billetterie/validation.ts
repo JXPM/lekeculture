@@ -17,6 +17,8 @@ export function normaliserTelephone(brut: unknown): string | null {
   if (d.startsWith('+225')) d = d.slice(4);
   else if (/^225\d{10}$/.test(d)) d = d.slice(3);
   if (/^0[157]\d{8}$/.test(d)) return `+225${d}`;
+  // Diaspora : « +33 06… » s'écrit en réalité +336… (le 0 national disparaît après l'indicatif).
+  d = d.replace(/^\+(33|32|41|44|49|31|352)0(?=\d)/, '+$1');
   if (/^\+[1-9]\d{7,14}$/.test(d)) return d;
   return null;
 }

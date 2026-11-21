@@ -10,6 +10,8 @@ describe('normaliserTelephone', () => {
   });
   it('accepte un numéro international de la diaspora', () => {
     expect(normaliserTelephone('+33 6 12 34 56 78')).toBe('+33612345678');
+    expect(normaliserTelephone('+33 07 81 23 45 67')).toBe('+33781234567');
+    expect(normaliserTelephone('0033 06 12 34 56 78')).toBe('+33612345678');
   });
   it('refuse le reste', () => {
     expect(normaliserTelephone('0807000000')).toBeNull();
