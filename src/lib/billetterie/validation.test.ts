@@ -13,6 +13,14 @@ describe('normaliserTelephone', () => {
     expect(normaliserTelephone('+33 07 81 23 45 67')).toBe('+33781234567');
     expect(normaliserTelephone('0033 06 12 34 56 78')).toBe('+33612345678');
   });
+  it('utilise le pays choisi dans la liste', () => {
+    expect(normaliserTelephone('06 12 34 56 78', '33')).toBe('+33612345678');
+    expect(normaliserTelephone('77 123 45 67', '221')).toBe('+221771234567');
+    expect(normaliserTelephone('01 90 12 34 56', '229')).toBe('+2290190123456');
+    expect(normaliserTelephone('514 123 4567', '1')).toBe('+15141234567');
+    // un + tapé l'emporte sur le pays choisi
+    expect(normaliserTelephone('+33 6 12 34 56 78', '225')).toBe('+33612345678');
+  });
   it('refuse le reste', () => {
     expect(normaliserTelephone('0807000000')).toBeNull();
     expect(normaliserTelephone('12345')).toBeNull();

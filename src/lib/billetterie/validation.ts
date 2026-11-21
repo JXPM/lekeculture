@@ -10,18 +10,8 @@ export const nouveauCode = () => `LK-${aleatoire(5)}-${aleatoire(5)}-${aleatoire
 
 export const normaliserCode = (code: unknown) => String(code ?? '').trim().toUpperCase();
 
-// Numéro ivoirien (10 chiffres, 01/05/07) ou international (+33…, +1…) → E.164.
-export function normaliserTelephone(brut: unknown): string | null {
-  let d = String(brut ?? '').replace(/[\s.\-()]/g, '');
-  if (d.startsWith('00')) d = `+${d.slice(2)}`;
-  if (d.startsWith('+225')) d = d.slice(4);
-  else if (/^225\d{10}$/.test(d)) d = d.slice(3);
-  if (/^0[157]\d{8}$/.test(d)) return `+225${d}`;
-  // Diaspora : « +33 06… » s'écrit en réalité +336… (le 0 national disparaît après l'indicatif).
-  d = d.replace(/^\+(33|32|41|44|49|31|352)0(?=\d)/, '+$1');
-  if (/^\+[1-9]\d{7,14}$/.test(d)) return d;
-  return null;
-}
+export { normaliserTelephone } from './telephone';
+import { normaliserTelephone } from './telephone';
 
 const texte = (v: unknown, max = 60) => String(v ?? '').trim().replace(/\s+/g, ' ').slice(0, max);
 
@@ -29,6 +19,7 @@ export type EntreeReservation = {
   prenom?: unknown;
   nom?: unknown;
   telephone?: unknown;
+  indicatif?: unknown;
   consentement?: unknown;
   optin?: unknown;
   source?: unknown;
@@ -51,8 +42,8 @@ export function validerReservation(e: EntreeReservation):
   const nom = texte(e.nom);
   if (!prenom) erreurs.prenom = 'Indique ton prénom.';
   if (!nom) erreurs.nom = 'Indique ton nom.';
-  const telephone = normaliserTelephone(e.telephone);
-  if (!telephone) erreurs.telephone = 'Numéro WhatsApp invalide (ex. 07 07 00 00 00).';
+  const telephone = normaliserTelephone(e.telephone, e.indicatif);
+  if (!telephone) erreurs.telephone = 'Numéro WhatsApp invalide : vérifie le pays et le numéro.';
   if (e.consentement !== true) erreurs.consentement = 'Accepte la politique de confidentialité pour réserver.';
   if (Object.keys(erreurs).length) return { ok: false, erreurs };
   const source = texte(e.source, 30).toLowerCase().replace(/[^a-z0-9_-]/g, '') || null;

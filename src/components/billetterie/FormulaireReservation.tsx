@@ -3,7 +3,8 @@
 import { useEffect, useState, type FormEvent } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Loader2, Ticket } from 'lucide-react';
+import { ChevronDown, Loader2, Ticket } from 'lucide-react';
+import { PAYS } from '@/lib/billetterie/telephone';
 
 type Champs = 'prenom' | 'nom' | 'telephone' | 'consentement';
 
@@ -15,6 +16,7 @@ export function FormulaireReservation({ evenement, ouvert }: { evenement: string
   const [erreurs, setErreurs] = useState<Partial<Record<Champs, string>>>({});
   const [message, setMessage] = useState('');
   const [ticketExistant, setTicketExistant] = useState<string | null>(null);
+  const [pays, setPays] = useState(PAYS[0]);
 
   // Ticket déjà pris sur ce téléphone : on vérifie qu'il existe toujours (sinon on l'oublie).
   useEffect(() => {
@@ -48,6 +50,7 @@ export function FormulaireReservation({ evenement, ouvert }: { evenement: string
           prenom: f.get('prenom'),
           nom: f.get('nom'),
           telephone: f.get('telephone'),
+          indicatif: pays.indicatif,
           consentement: f.get('consentement') === 'on',
           optin: f.get('optin') === 'on',
           site: f.get('site'),
@@ -111,14 +114,35 @@ export function FormulaireReservation({ evenement, ouvert }: { evenement: string
           </label>
         </div>
 
-        <label className="block text-sm font-medium text-neutral-200">
-          Numéro WhatsApp
-          <input name="telephone" type="tel" inputMode="tel" autoComplete="tel" required placeholder="07 07 00 00 00"
-            aria-invalid={!!erreurs.telephone} aria-describedby="err-telephone aide-telephone" className={`${champ} ${bord('telephone')}`} />
+        <div>
+          <label htmlFor="telephone" className="block text-sm font-medium text-neutral-200">Numéro WhatsApp</label>
+          <div className="mt-2 flex gap-2">
+            <div className="relative shrink-0">
+              <label htmlFor="pays" className="sr-only">Pays du numéro</label>
+              <select
+                id="pays"
+                value={pays.code}
+                onChange={(e) => setPays(PAYS.find((p) => p.code === e.target.value) ?? PAYS[0])}
+                className="h-full w-[7.75rem] appearance-none rounded-md border border-neutral-700 bg-neutral-950 py-3.5 pl-3 pr-9 text-base text-neutral-100 focus:outline-none focus:ring-2 focus:ring-emerald-400"
+              >
+                {PAYS.map((p) => (
+                  <option key={p.code} value={p.code}>{p.nom} (+{p.indicatif})</option>
+                ))}
+              </select>
+              {/* Affichage compact par-dessus la liste : seul l'indicatif est visible */}
+              <span aria-hidden className="pointer-events-none absolute inset-y-px left-px right-7 flex items-center rounded-l-md bg-neutral-950 pl-3 text-base text-neutral-100">
+                {pays.code} +{pays.indicatif}
+              </span>
+              <ChevronDown aria-hidden className="pointer-events-none absolute right-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-400" />
+            </div>
+            <input id="telephone" name="telephone" type="tel" inputMode="tel" autoComplete="tel-national" required placeholder={pays.exemple}
+              aria-invalid={!!erreurs.telephone} aria-describedby="err-telephone aide-telephone"
+              className={`min-w-0 flex-1 rounded-md border bg-neutral-950 px-4 py-3.5 text-base text-neutral-100 placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-emerald-400 ${bord('telephone')}`} />
+          </div>
           {erreurs.telephone
             ? <span id="err-telephone" className="mt-1.5 block text-sm text-red-400">{erreurs.telephone}</span>
-            : <span id="aide-telephone" className="mt-1.5 block text-sm text-neutral-500">Un ticket par numéro. Hors Côte d’Ivoire, commence par +indicatif.</span>}
-        </label>
+            : <span id="aide-telephone" className="mt-1.5 block text-sm text-neutral-500">Choisis le pays, puis tape ton numéro. Un ticket par numéro.</span>}
+        </div>
 
         {/* Piège à robots : invisible pour les humains */}
         <input name="site" tabIndex={-1} autoComplete="off" aria-hidden className="absolute left-[-9999px] h-0 w-0 opacity-0" />
