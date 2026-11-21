@@ -101,12 +101,18 @@ const config: Config = {
       animation: {
         "fade-in": "fade-in 0.7s ease-out both",
         "rise": "rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both",
+        // Tampon « Entré » qui s'abat sur le ticket déchiré (billetterie)
+        tampon: "tampon 0.45s 0.55s cubic-bezier(0.2, 1.6, 0.4, 1) both",
       },
       keyframes: {
         "fade-in": { "0%": { opacity: "0" }, "100%": { opacity: "1" } },
         rise: {
           "0%": { transform: "translateY(24px)", opacity: "0" },
           "100%": { transform: "translateY(0)", opacity: "1" },
+        },
+        tampon: {
+          "0%": { transform: "scale(1.9)", opacity: "0" },
+          "100%": { transform: "scale(1)", opacity: "1" },
         },
       },
     },
