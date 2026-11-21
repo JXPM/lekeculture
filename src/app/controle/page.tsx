@@ -19,6 +19,10 @@ declare global {
 }
 
 const EVENEMENT = Object.keys(EVENEMENTS)[0];
+const DELAI_VALIDE = 120_000; // un ticket validé sur ce téléphone n'est pas relu pendant 2 min
+const DELAI_AUTRE = 8_000;
+// Même code qu'il soit lu en URL (…/t/LK-…) ou tapé à la main.
+const cleDuCode = (lu: string) => (lu.match(/\/t\/([^/?#\s]+)/)?.[1] ?? lu).trim().toUpperCase();
 const heure = (iso: string) =>
   new Intl.DateTimeFormat('fr-FR', { hour: '2-digit', minute: '2-digit', timeZone: 'Africa/Abidjan' }).format(new Date(iso));
 
@@ -34,7 +38,9 @@ export default function PageControle() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const fluxRef = useRef<MediaStream | null>(null);
   const occupe = useRef(false);
-  const dernier = useRef({ code: '', quand: 0 });
+  // Derniers QR lus sur ce téléphone : un ticket qui vient d'être validé reste devant la caméra
+  // quelques secondes, il ne doit pas être relu comme un second passage.
+  const vus = useRef(new Map<string, { quand: number; delai: number }>());
 
   const appel = useCallback(async (methode: 'GET' | 'POST', k: string, body?: object) => {
     const url = methode === 'GET' ? `/api/billetterie/controle?evenement=${EVENEMENT}` : '/api/billetterie/controle';
@@ -73,18 +79,21 @@ export default function PageControle() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const verifier = useCallback(async (lu: string) => {
+  const verifier = useCallback(async (lu: string, manuel = false) => {
     const maintenant = Date.now();
-    // Ignore le même QR relu dans les 4 secondes (la caméra le voit plusieurs fois).
-    if (occupe.current || (lu === dernier.current.code && maintenant - dernier.current.quand < 4000)) return;
+    const code = cleDuCode(lu);
+    const vu = vus.current.get(code);
+    // Même QR relu par la caméra : ignoré 2 min s'il vient d'être validé ici, 8 s sinon.
+    if (occupe.current || (!manuel && vu && maintenant - vu.quand < vu.delai)) return;
     occupe.current = true;
-    dernier.current = { code: lu, quand: maintenant };
     try {
       const r: Resultat = await appel('POST', cle, { code: lu, poste });
+      vus.current.set(code, { quand: maintenant, delai: r.resultat === 'ok' ? DELAI_VALIDE : DELAI_AUTRE });
       setResultat(r);
       setEntrees(r.entrees);
       if (navigator.vibrate) navigator.vibrate(r.resultat === 'ok' ? 90 : [220, 90, 220]);
     } catch (e) {
+      vus.current.set(code, { quand: maintenant, delai: DELAI_AUTRE });
       if ((e as { status?: number }).status === 401) {
         setConnecte(false);
         setErreurConnexion('Code d’accès changé : reconnecte-toi.');
@@ -258,8 +267,7 @@ export default function PageControle() {
             const f = new FormData(e.currentTarget);
             const code = String(f.get('code') ?? '').trim();
             if (code) {
-              dernier.current = { code: '', quand: 0 };
-              verifier(code);
+              verifier(code, true);
               e.currentTarget.reset();
             }
           }}
