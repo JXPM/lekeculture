@@ -82,6 +82,20 @@ export default async function PageEvenement({ params }: { params: Promise<{ slug
             <Ticket className="h-5 w-5" aria-hidden />
             Réserver mon ticket gratuit
           </a>
+
+          {ev.liensEcoute.length > 0 && (
+            <p className="mt-5 text-sm text-neutral-600">
+              Écouter {ev.artiste} sur{' '}
+              {ev.liensEcoute.map((l, i) => (
+                <span key={l.url}>
+                  {i > 0 && ', '}
+                  <a href={l.url} target="_blank" rel="noopener noreferrer" className="font-medium text-neutral-950 underline decoration-emerald-600/60 underline-offset-4 hover:text-emerald-700">
+                    {l.label}
+                  </a>
+                </span>
+              ))}
+            </p>
+          )}
         </div>
 
         <figure className="relative">

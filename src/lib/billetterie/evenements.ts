@@ -53,7 +53,9 @@ export const EVENEMENTS: Record<string, Evenement> = {
       { src: '/evenements/ozaki/ozaki-4.jpg', alt: 'Portrait d’Ozaki de profil, bob et chaîne' },
       { src: '/evenements/ozaki/ozaki-5.jpg', alt: 'Ozaki en pull clair, en mouvement' },
     ],
-    liensEcoute: [],
+    liensEcoute: [
+      { label: 'Spotify', url: 'https://open.spotify.com/artist/6OJSaFfOYz42NZuVqn8tze' },
+    ],
   },
 };
 
