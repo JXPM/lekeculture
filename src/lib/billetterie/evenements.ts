@@ -34,9 +34,9 @@ export const EVENEMENTS: Record<string, Evenement> = {
       'Une soirée pour découvrir le nouvel EP d’Ozaki, avec la participation d’ABDXXL et Goh Dedi, dans les conditions d’un vrai lancement.',
       'Entrée gratuite, sur réservation : prends ton ticket ici, garde ton QR code, et présente-le à l’entrée.',
     ],
-    date: '2026-11-27',
-    heureDebut: null,
-    heureFin: null,
+    date: '2026-12-04',
+    heureDebut: '18:00',
+    heureFin: '00:00',
     lieu: 'Palm Square',
     ville: 'Abidjan',
     adresse: null,
@@ -59,7 +59,7 @@ export const EVENEMENTS: Record<string, Evenement> = {
 
 export const trouverEvenement = (slug: string): Evenement | null => EVENEMENTS[slug] ?? null;
 
-// « Vendredi 27 novembre 2026 »
+// « Vendredi 4 décembre 2026 »
 export function dateLongue(e: Evenement): string {
   const d = new Date(`${e.date}T12:00:00Z`);
   const s = new Intl.DateTimeFormat('fr-FR', {
