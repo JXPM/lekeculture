@@ -21,21 +21,23 @@ export type Evenement = {
   partenaires: string[];
   ouvert: boolean; // false = réservations fermées
   photos: { src: string; alt: string }[];
-  liensEcoute: { label: string; url: string }[];
+  liensEcoute: { label: string; url: string; artiste: string }[];
 };
 
 export const EVENEMENTS: Record<string, Evenement> = {
   'ozaki-listening-party': {
     slug: 'ozaki-listening-party',
+    // Nom et accroche donnés par l'organisateur (David Touré) le 2026-11-24. Le slug reste
+    // « ozaki-listening-party » pour ne pas casser les liens déjà partagés.
     titre: 'Listening Party',
-    artiste: 'Ozaki',
-    accroche: 'Écoute en avant-première du nouvel EP, en présence de l’artiste.',
+    artiste: 'Slime Season',
+    accroche: 'Une expérience immersive dans leur univers artistique, en présence des artistes.',
     description: [
-      'Une soirée pour découvrir le nouvel EP d’Ozaki, avec la participation d’ABDXXL et Goh Dedi, dans les conditions d’un vrai lancement.',
+      'Une soirée d’écoute pour entrer dans l’univers des artistes de Slime Season, en leur présence, dans les conditions d’un vrai lancement. D’autres invités rejoindront la soirée.',
       'Entrée gratuite, sur réservation : prends ton ticket ici, garde ton QR code, et présente-le à l’entrée.',
     ],
     date: '2026-12-04',
-    heureDebut: '18:00',
+    heureDebut: '20:00',
     heureFin: '00:00',
     lieu: 'Palm Square',
     ville: 'Abidjan',
@@ -54,7 +56,7 @@ export const EVENEMENTS: Record<string, Evenement> = {
       { src: '/evenements/ozaki/ozaki-5.jpg', alt: 'Ozaki en pull clair, en mouvement' },
     ],
     liensEcoute: [
-      { label: 'Spotify', url: 'https://open.spotify.com/artist/6OJSaFfOYz42NZuVqn8tze' },
+      { label: 'Spotify', url: 'https://open.spotify.com/artist/6OJSaFfOYz42NZuVqn8tze', artiste: 'Ozaki' },
     ],
   },
 };

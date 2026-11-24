@@ -85,7 +85,7 @@ export default async function PageEvenement({ params }: { params: Promise<{ slug
 
           {ev.liensEcoute.length > 0 && (
             <p className="mt-5 text-sm text-neutral-600">
-              Écouter {ev.artiste} sur{' '}
+              Écouter {ev.liensEcoute[0].artiste} sur{' '}
               {ev.liensEcoute.map((l, i) => (
                 <span key={l.url}>
                   {i > 0 && ', '}
@@ -147,7 +147,7 @@ export default async function PageEvenement({ params }: { params: Promise<{ slug
       </section>
 
       {/* Photos */}
-      <section aria-label={`Photos de ${ev.artiste}`} className="border-t border-neutral-800">
+      <section aria-label={`Photos de la soirée ${ev.artiste}`} className="border-t border-neutral-800">
         <div className="flex gap-3 overflow-x-auto px-4 py-10 sm:px-6 lg:px-8 [scrollbar-width:none]">
           {autres.map((p) => (
             <img key={p.src} src={p.src} alt={p.alt} loading="lazy"
